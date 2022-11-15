@@ -20,10 +20,6 @@ const BasketItem: React.FC<BasketItemProps> = ({ item }) => {
     dispatch(decrementItemQuantity({ id }));
   }
 
-  const remove = () => {
-    dispatch(removeItem({ id }))
-  }
-
   return (
     <div className={styles.basketItem}>
       <div>
@@ -35,7 +31,7 @@ const BasketItem: React.FC<BasketItemProps> = ({ item }) => {
         </div>
       </div>
 
-      <button onClick={remove}>
+      <button onClick={decreaseItemQuantity}>
         &times; Remove
       </button>
     </div>
