@@ -2,7 +2,9 @@ import { NextPage } from 'next';
 import Head from 'next/head';
 import Image, { ImageLoader } from 'next/image';
 import Link from 'next/link';
+import { useDispatch, useSelector } from 'react-redux';
 import Navbar from '../../../components/navbar';
+import { addItem, removeItem, selectBasketState } from '../../../store/slices/basket.slice';
 import { Book } from '../../../types';
 import styles from './book-detail.module.css';
 
@@ -12,8 +14,20 @@ interface SingleBookViewProps {
 
 const SingleBookView: NextPage<SingleBookViewProps> = ({ details }) => {
   const { id, author, cover, metaDescription, metaTitle, title } = details;
+  const { items } = useSelector(selectBasketState);
+  const dispatch = useDispatch();
+
+  const itemIsInBasket = items.some(item => item.id === id);
 
   const imageLoader: ImageLoader = ({ src }) => src;
+
+  const addToBasket = () => {
+    dispatch(addItem({ id, title, qty: 1 }))
+  };
+
+  const removeFromBasket = () => {
+    dispatch(removeItem({ id }))
+  };
 
   return (
     <>
@@ -42,6 +56,7 @@ const SingleBookView: NextPage<SingleBookViewProps> = ({ details }) => {
           <div>
             <Image
               loader={imageLoader}
+              unoptimized
               src={cover}
               alt=""
               height={100}
@@ -51,9 +66,17 @@ const SingleBookView: NextPage<SingleBookViewProps> = ({ details }) => {
           </div>
           
           <div>
-            <button className={styles.actionButton}>
-              Add to Basket
-            </button>
+            {
+              itemIsInBasket ? (
+                <button className={styles.actionButton} onClick={removeFromBasket}>
+                  Remove from Basket
+                </button>
+              ) : (
+                <button className={styles.actionButton} onClick={addToBasket}>
+                  Add to Basket
+                </button>
+              )
+            }
           </div>
         </div>
       </main>

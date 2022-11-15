@@ -1,8 +1,11 @@
 import Image, { ImageLoader } from "next/image";
 import Link from "next/link";
+import { useSelector } from "react-redux";
+import { selectBasketState } from "../../store/slices/basket.slice";
 import styles from "./navbar.module.css";
 
-export default function Navbar () {
+const Navbar = () => {
+  const { items } = useSelector(selectBasketState)
 
   return (
     <div className={styles.wrapper}>
@@ -20,7 +23,11 @@ export default function Navbar () {
         </div>
 
         <div className={styles.navbarRight}>
-          <span>Empty</span>
+
+          {
+            items.length ? <span>{ items.length } item(s)</span> : <span>Empty</span>
+          }
+          
           <Link href="/basket">
             <button className={styles.cta}>
               View Basket
@@ -31,3 +38,5 @@ export default function Navbar () {
     </div>
   )
 }
+
+export default Navbar;

@@ -20,3 +20,17 @@ export type HomepageApiResponse = {
 export type AvailableBooksApiResponse = TrimmedBook[];
 
 export type BooksApiResponse = Book[];
+
+export type BasketItem = {
+  id: number,
+  title: string,
+  qty: number,
+}
+
+export type BasketState = {
+  items: BasketItem[]
+}
+
+export type AppState = {
+  basket: BasketState
+}
