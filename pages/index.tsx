@@ -40,7 +40,7 @@ const Home: NextPage<HomeProps> = ({ metaDescription, metaTitle, copy, available
         <div className={styles.intro}>
           <h3>Online Book Store</h3>
           <p>Here you can order amazing books!</p>
-          <p className={styles.copy}>{copy}</p>
+          <p data-testid="copy" className={styles.copy}>{copy}</p>
         </div>
 
         <section className={styles.photoSectionWrapper}>

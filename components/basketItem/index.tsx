@@ -26,14 +26,14 @@ const BasketItem: React.FC<BasketItemProps> = ({ item }) => {
 
   return (
     <div className={styles.basketItem}>
-      <p>
+      <div>
         <span className={styles.basketItemtitle}>{ title }</span> x { qty }
 
         <div className={styles.qtyModifierWrapper}>
           <button onClick={increaseItemQuantity}  >+</button>
           <button onClick={decreaseItemQuantity} >-</button>
         </div>
-      </p>
+      </div>
 
       <button onClick={remove}>
         &times; Remove

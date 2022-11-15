@@ -8,11 +8,11 @@ import { addItem, removeItem, selectBasketState } from '../../../store/slices/ba
 import { Book } from '../../../types';
 import styles from './book-detail.module.css';
 
-interface SingleBookViewProps {
+interface BookDetailViewProps {
   details: Book
 }
 
-const SingleBookView: NextPage<SingleBookViewProps> = ({ details }) => {
+const BookDetailView: NextPage<BookDetailViewProps> = ({ details }) => {
   const { id, author, cover, metaDescription, metaTitle, title } = details;
   const { items } = useSelector(selectBasketState);
   const dispatch = useDispatch();
@@ -37,6 +37,7 @@ const SingleBookView: NextPage<SingleBookViewProps> = ({ details }) => {
       </Head>
 
       <Navbar />
+      
       <main className="container">
         <div>
           <Link href="/">
@@ -54,15 +55,19 @@ const SingleBookView: NextPage<SingleBookViewProps> = ({ details }) => {
 
         <div className={styles.gridArea}>
           <div>
-            <Image
-              loader={imageLoader}
-              unoptimized
-              src={cover}
-              alt=""
-              height={100}
-              width={100}
-              className={styles.coverImage}
-            />
+            {
+              cover && (
+                <Image
+                  loader={imageLoader}
+                  unoptimized
+                  src={cover}
+                  alt=""
+                  height={100}
+                  width={100}
+                  className={styles.coverImage}
+                />
+              )
+            }
           </div>
           
           <div>
@@ -84,10 +89,10 @@ const SingleBookView: NextPage<SingleBookViewProps> = ({ details }) => {
   )
 }
 
-SingleBookView.getInitialProps = async ({ query }) => {
+BookDetailView.getInitialProps = async ({ query }) => {
   const res = await fetch(`http://localhost:3000/books/${query.id}`)
   const details: Book = await res.json();
   return { details }
 }
 
-export default SingleBookView;
+export default BookDetailView;

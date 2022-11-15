@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import BasketItem from "../../components/basketItem";
 import Navbar from "../../components/navbar";
-import { clearBasket, decrementItemQuantity, incrementItemQuantity, selectBasketState } from "../../store/slices/basket.slice";
+import { clearBasket, selectBasketState } from "../../store/slices/basket.slice";
 import styles from "./basket.module.css";
 
 const BasketView = () => {
@@ -59,10 +59,10 @@ const BasketView = () => {
         {
           items.length ? (
             <div className={styles.payBtnWrapper}>
-              <button onClick={pay}>Pay</button>
+              <button data-testid="payBtn" onClick={pay}>Pay</button>
             </div>
           ) : (
-            <div className={styles.empty}>
+            <div data-testid="emptyDiv" className={styles.empty}>
               No items in your basket
             </div>
           )
