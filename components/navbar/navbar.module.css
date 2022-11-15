@@ -1,0 +1,30 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2em 5em;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.wrapper{
+  background-color: white;
+}
+
+.navbarRight{
+  display: flex;
+  gap: 1em;
+  align-items: center;
+}
+
+.cta{
+  width: 120px;
+  background-color: blue;
+  color: white;
+  border-radius: 3px;
+}
+
+.logo{
+  width: 150px;
+  height: 80px;
+}
