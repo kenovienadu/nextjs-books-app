@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Navbar from '../../../components/navbar';
 import { addItem, removeItem, selectBasketState } from '../../../store/slices/basket.slice';
 import { Book } from '../../../types';
+import ApiService from '../../../utils/api.service';
 import styles from './book-detail.module.css';
 
 interface BookDetailViewProps {
@@ -90,8 +91,7 @@ const BookDetailView: NextPage<BookDetailViewProps> = ({ details }) => {
 }
 
 BookDetailView.getInitialProps = async ({ query }) => {
-  const res = await fetch(`http://localhost:3000/books/${query.id}`)
-  const details: Book = await res.json();
+  const details = await ApiService.getBookDetails(query.id as string)
   return { details }
 }
 
