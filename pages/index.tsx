@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Navbar from '../components/navbar';
 import styles from '../styles/Home.module.css';
 import { AvailableBooksApiResponse, Book, HomepageApiResponse, TrimmedBook } from '../types';
+import ApiService from '../utils/api.service';
 interface HomeProps {
   metaTitle: string;
   metaDescription: string;
@@ -69,13 +70,8 @@ const Home: NextPage<HomeProps> = ({ metaDescription, metaTitle, copy, available
 }
 
 Home.getInitialProps = async () => {
-  const [metaResponse, availableBooksResponse] = await Promise.all([
-    fetch('http://localhost:3000/homepage'),
-    fetch('http://localhost:3000/availableBooks')
-  ])
-
-  const metaData: HomepageApiResponse = await metaResponse.json();
-  const availableBooks: AvailableBooksApiResponse = await availableBooksResponse.json()
+  const metaData = await ApiService.getHomePageData();
+  const availableBooks = await ApiService.getAvailableBooks();
 
   const { SEO, homepageCopy: copy } = metaData;
   const { metaTitle, metaDescription } = SEO;
