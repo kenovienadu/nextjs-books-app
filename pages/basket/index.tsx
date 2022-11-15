@@ -1,43 +1,35 @@
 import Head from "next/head";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import BasketItem from "../../components/basketItem";
 import Navbar from "../../components/navbar";
+import { clearBasket, decrementItemQuantity, incrementItemQuantity, selectBasketState } from "../../store/slices/basket.slice";
 import styles from "./basket.module.css";
 
 const BasketView = () => {
+  const { items } = useSelector(selectBasketState);
+  const dispatch = useDispatch();
+  const router = useRouter();
 
-  const basket = [
-    {
-      id: 1,
-      title: "test",
-      qty: 2,
-    },
-    {
-      id: 2,
-      title: "oliver twist",
-      qty: 1,
-    },
-    {
-      id: 3,
-      title: "1984",
-      qty: 1,
-    },
-  ]
-
-  const basketItems = basket.map((info) => {
-    const { id, title, qty } = info;
+  const basketItems = items.map((info) => {
+    const { id } = info;
 
     return (
-      <div key={id} className={styles.basketItem}>
-        <p>
-          <span className={styles.basketItemtitle}>{ title }</span> x { qty }
-        </p>
-
-        <button>
-          &times; Remove
-        </button>
-      </div>
+     <BasketItem key={id} item={info} />
     )
   })
+
+  const pay = () => {
+    const booksToBuy = items.map(({ id, qty }) => {
+      return { id, qty }
+    })
+
+    console.log({ booksToBuy })
+
+    dispatch(clearBasket())
+    router.push('/');
+  }
 
   return (
     <>
@@ -64,9 +56,18 @@ const BasketView = () => {
           { basketItems }
         </div>
 
-        <div className={styles.payBtnWrapper}>
-          <button>Pay</button>
-        </div>
+        {
+          items.length ? (
+            <div className={styles.payBtnWrapper}>
+              <button onClick={pay}>Pay</button>
+            </div>
+          ) : (
+            <div className={styles.empty}>
+              No items in your basket
+            </div>
+          )
+        }
+
       </main>
     </>
   )
