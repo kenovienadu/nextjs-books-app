@@ -1,0 +1,33 @@
+.basketItem{
+  background-color: white;
+  display: grid;
+  align-items: center;
+  grid-template-columns: auto 120px;
+  margin-bottom: 1em;
+  padding: 1em;
+  border-radius: 3px;
+}
+
+.basketItem button{
+  background-color: rgb(147, 8, 8);
+  color: white;
+  border-radius: 2px;
+}
+
+.basketItemtitle{
+  font-weight: 500;
+  font-size: 1.2em;
+  text-transform: capitalize;
+}
+
+.payBtnWrapper{
+  margin-top: 1.5em;
+}
+
+.payBtnWrapper button{
+  width: 100%;
+  background-color: green;
+  color: white;
+  height: 70px;
+  border-radius: 5px;
+}
