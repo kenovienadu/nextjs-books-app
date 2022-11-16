@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppState, BasketItem, BasketState } from "../../types";
 
 const initialState: BasketState = {
@@ -9,19 +9,19 @@ export const basketSlice = createSlice({
   name: 'basket',
   initialState,
   reducers: {
-    addItem(state, action){
-      const { id, title, qty } = action.payload as BasketItem;
+    addItem(state, action: PayloadAction<BasketItem>){
+      const { id, title, qty } = action.payload;
       const index = state.items.findIndex(item => item.id === id);
 
       if(index !== -1){
         return;
       }
 
-      state.items = [...state.items, { id, title, qty }]
+      state.items = [...state.items, { id, title, qty }];
     },
 
-    incrementItemQuantity(state, action){
-      const { id } = action.payload as BasketItem;
+    incrementItemQuantity(state, action: PayloadAction<Partial<BasketItem>>){
+      const { id } = action.payload;
       const index = state.items.findIndex(item => item.id === id);
 
       if(index === -1){
@@ -37,8 +37,8 @@ export const basketSlice = createSlice({
       state.items = [...copy];
     },
 
-    decrementItemQuantity(state, action){
-      const { id } = action.payload as BasketItem;
+    decrementItemQuantity(state, action: PayloadAction<Partial<BasketItem>>){
+      const { id } = action.payload;
       const index = state.items.findIndex(item => item.id === id);
 
       if(index === -1){
@@ -55,7 +55,7 @@ export const basketSlice = createSlice({
       state.items = [...copy].filter(item => item.qty > 0);
     },
 
-    removeItem(state, action){
+    removeItem(state, action: PayloadAction<Partial<BasketItem>>){
       const { id } = action.payload as BasketItem;
       state.items = state.items.filter(item => item.id !== id);
     },
