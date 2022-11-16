@@ -1,3 +1,4 @@
+import { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -7,7 +8,7 @@ import Navbar from "../../components/navbar";
 import { clearBasket, selectBasketState } from "../../store/slices/basket.slice";
 import styles from "./basket.module.css";
 
-const BasketView = () => {
+const BasketView: NextPage = () => {
   const { items } = useSelector(selectBasketState);
   const dispatch = useDispatch();
   const router = useRouter();

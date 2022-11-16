@@ -8,6 +8,11 @@ Visit https://github.com/typicode/json-server to get started with `json-server`
 
 <br>
 
+Clone the repository on your local machine
+```bash
+git clone https://github.com/kenovienadu/nextjs-books-app.git
+```
+
 Install `json-server` 
 ```bash
 npm install -g json-server
@@ -19,11 +24,15 @@ Start the mock api
 json-server --watch db.json
 ```
 
+Install App Dependencies
+```bash
+npm install
+```
 
 Run the development server:
 
 ```bash
-yarn dev
+npm run dev
 ```
 
 Open [http://localhost:3002](http://localhost:3002) with your browser to see the result.
