@@ -26,12 +26,12 @@ Run the development server:
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3002](http://localhost:3002) with your browser to see the result.
 
 The following routes are available:
-1. Homepage - http://localhost:3000
-2. Book Detail View - http://localhost:3000/detail/[id]
-3. Basket View - http://localhost:3000/basket
+1. Homepage - http://localhost:3002
+2. Book Detail View - http://localhost:3002/detail/[id]
+3. Basket View - http://localhost:3002/basket
 
 <br>
 
